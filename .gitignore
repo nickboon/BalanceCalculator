@@ -1,9 +1,11 @@
 # Secret stuff
 nicks.balance.json
 
-# local third party
-js/vendor
+# Built
+dist/js
 
+# Third party
+dist/css/normalize*
 
 # Windows image file caches
 Thumbs.db

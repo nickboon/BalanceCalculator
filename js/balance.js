@@ -1,39 +1,18 @@
-(function(factory) {
-    // allows unit testing in node
-    if (typeof module != 'undefined' && module.exports)
-        module.exports = factory();
-})(function() {
-    var daysIn = {
-        year: 365.25,
-        month: 30.4375,
-        week: 7
-    };
+var amountPerDay = require('./cycles.js');
 
-    var convert = {};
+var balance = function(entries) {
+    if (typeof entries != 'object')
+        throw 'entries must be an object.';
 
-    convert.amountPerDay = function(entry) {
-        if (typeof entry.amount != 'number')
-            throw 'Entry must have an amount, and it must be a number.';
+    var sum = 0;
 
-        var multiplier = entry.every || 1;
-        var days = daysIn[entry.cycles] || 1;
-        return entry.amount / (days * multiplier);
-    };
+    if (entries.credit)
+        entries.credit.forEach(entry => sum += amountPerDay(entry));
 
-    var balance = function(balanceObject) {
-        if (typeof balanceObject != 'object')
-            throw 'Balance must be an object.';
+    if (entries.debit)
+        entries.debit.forEach(entry => sum -= amountPerDay(entry));
 
-        var sum = 0;
+    return sum;
+};
 
-        if (balanceObject.credit)
-            balanceObject.credit.forEach(entry => sum += convert.amountPerDay(entry));
-
-        if (balanceObject.debit)
-            balanceObject.debit.forEach(entry => sum -= convert.amountPerDay(entry));
-
-        return sum;
-    };
-
-    return balance;
-});
+module.exports = balance;

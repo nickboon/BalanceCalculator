@@ -5,12 +5,14 @@
     "directories": {
         "test": "tests"
     },
-    "dependencies": {
-        "tape": "^4.9.0"
+    "dependencies": {},
+    "devDependencies": {
+        "tape": "^4.9.0",
+        "browserify": "^16.1.1"
     },
-    "devDependencies": {},
     "scripts": {
-        "test": "tape tests/*.js"
+        "test": "tape tests/*.js",
+        "build": "browserify js/app.js > dist/js/bundle.js"
     },
     "author": "Nick Boon",
     "license": "ISC"
