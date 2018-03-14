@@ -15,7 +15,7 @@ test('balance() given null', function(assert) {
     assert.end();
 });
 
-test('balance() given obejct with no credit or debit entries', function(assert) {
+test('balance() given object with no credit or debit entries', function(assert) {
     var expected = 0;
 
     var actual = balance({});
@@ -65,5 +65,59 @@ test('balance() given equal debit and credit entries', function(assert) {
     });
 
     assert.equal(actual, expected, 'should return 0');
+    assert.end();
+});
+
+test('balance() given a weekly credit entry', function(assert) {
+    var credit = 7;
+    var expected = 1;
+
+    var actual = balance({
+        "credit": [{
+            "amount": credit,
+            "cycles": "week"
+        }]
+    });
+
+    assert.equal(actual, expected, 'should return that amount per day');
+    assert.end();
+});
+
+test('balance() given an n weekly credit entry', function(assert) {
+    var credit = 14;
+    var n = 2
+    var expected = 1;
+
+    var actual = balance({
+        "credit": [{
+            "amount": credit,
+            "every": n,
+            "cycles": "week"
+        }]
+    });
+
+    assert.equal(actual, expected, 'should return that amount per day');
+    assert.end();
+});
+
+test('balance() given an amount which is not of type string', function(assert) {
+    assert.throws(function() {
+        balance({
+            "credit": [{
+                "amount": "0"
+            }]
+        });
+    }, 'should throw an exception');
+    assert.end();
+});
+
+test('balance() given an amount of 0', function(assert) {
+    assert.doesNotThrow(function() {
+        balance({
+            "credit": [{
+                "amount": 0
+            }]
+        });
+    }, 'should not throw an exception');
     assert.end();
 });
