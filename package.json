@@ -7,13 +7,34 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "tape": "^4.9.0",
-        "browserify": "^16.1.1"
+        "babel-core": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babelify": "^8.0.0",
+        "browserify": "^16.1.1",
+        "tape": "^4.9.0"
     },
     "scripts": {
         "test": "tape tests/*.js",
-        "build": "browserify js/app.js > dist/js/bundle.js"
+        "build": "browserify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]"
     },
+    "eslintConfig": {
+        "env": {
+            "browser": true,
+            "node": true,
+            "es6": true
+        },
+        "rules": {
+            "quotes": [
+                "error",
+                "single"
+            ],
+            "semi": [
+                "error",
+                "always"
+            ]
+        }
+    },
+    "eslintIgnore": ["dist"],
     "author": "Nick Boon",
     "license": "ISC"
 }

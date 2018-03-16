@@ -6,13 +6,9 @@ var sum = function(entries) {
 
     var balance = 0;
     if (entries.credit)
-        entries.credit.forEach(function(entry) {
-            balance += amountPerDay(entry);
-        });
+        entries.credit.forEach((entry) => balance += amountPerDay(entry));
     if (entries.debit)
-        entries.debit.forEach(function(entry) {
-            balance -= amountPerDay(entry);
-        });
+        entries.debit.forEach((entry) => balance -= amountPerDay(entry));
     return balance;
 };
 
