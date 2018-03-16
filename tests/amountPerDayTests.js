@@ -1,11 +1,12 @@
+/* eslint-disable quotes */
 var test = require('tape');
-var cycles = require('../js/cycles.js');
+var amountPerDay = require('../js/balance.js').amountPerDay;
 
-test('cycles() given a weekly credit entry', (assert) => {
+test('amountPerDay() given a weekly credit entry', (assert) => {
     var credit = 7;
     var expected = 1;
 
-    var actual = cycles({
+    var actual = amountPerDay({
         "amount": credit,
         "cycles": "week"
     });
@@ -14,12 +15,12 @@ test('cycles() given a weekly credit entry', (assert) => {
     assert.end();
 });
 
-test('cycles() given an n weekly credit entry', (assert) => {
+test('amountPerDay() given an n weekly credit entry', (assert) => {
     var credit = 14;
-    var n = 2
+    var n = 2;
     var expected = 1;
 
-    var actual = cycles({
+    var actual = amountPerDay({
         "amount": credit,
         "every": n,
         "cycles": "week"
@@ -29,15 +30,15 @@ test('cycles() given an n weekly credit entry', (assert) => {
     assert.end();
 });
 
-test('cycles() given an amount which is not of type string', (assert) => {
-    assert.throws(() => cycles({
+test('amountPerDay() given an amount which is not of type string', (assert) => {
+    assert.throws(() => amountPerDay({
         "amount": "0"
     }), 'should throw an exception');
     assert.end();
 });
 
-test('cycles() given an amount of 0', (assert) => {
-    assert.doesNotThrow(() => cycles({
+test('amountPerDay() given an amount of 0', (assert) => {
+    assert.doesNotThrow(() => amountPerDay({
         "amount": 0
     }), 'should not throw an exception');
     assert.end();

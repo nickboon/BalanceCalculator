@@ -1,31 +1,32 @@
+/* eslint-disable quotes */
 var test = require('tape');
-var balance = require('../js/balance.js');
+var sum = require('../js/balance.js').sum;
 
-test('balance() with null argument', (assert) => {
-    assert.throws(() => balance(), 'should throw an exception');
+test('sum() with null argument', (assert) => {
+    assert.throws(() => sum(), 'should throw an exception');
     assert.end();
 });
 
-test('balance() given null', (assert) => {
+test('sum() given null', (assert) => {
     assert.throws(function() {
-        balance(null);
+        sum(null);
     }, 'should throw an exception');
     assert.end();
 });
 
-test('balance() given object with no credit or debit entries', (assert) => {
+test('sum() given object with no credit or debit entries', (assert) => {
     var expected = 0;
 
-    var actual = balance({});
+    var actual = sum({});
 
     assert.equal(actual, expected, 'should return 0');
     assert.end();
 });
 
-test('balance() given a single credit entry', (assert) => {
+test('sum() given a single credit entry', (assert) => {
     var expected = 10;
 
-    var actual = balance({
+    var actual = sum({
         "credit": [{
             "amount": expected
         }]
@@ -35,11 +36,11 @@ test('balance() given a single credit entry', (assert) => {
     assert.end();
 });
 
-test('balance() given a single debit entry', (assert) => {
+test('sum() given a single debit entry', (assert) => {
     var debit = 10;
     var expected = -debit;
 
-    var actual = balance({
+    var actual = sum({
         "debit": [{
             "amount": debit
         }]
@@ -49,11 +50,11 @@ test('balance() given a single debit entry', (assert) => {
     assert.end();
 });
 
-test('balance() given equal debit and credit entries', (assert) => {
+test('sum() given equal debit and credit entries', (assert) => {
     var amount = 10;
     var expected = 0;
 
-    var actual = balance({
+    var actual = sum({
         "debit": [{
             "amount": amount
         }],
