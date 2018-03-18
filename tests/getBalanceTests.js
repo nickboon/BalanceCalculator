@@ -1,32 +1,33 @@
-/* eslint-disable quotes */
 var test = require('tape');
-var sum = require('../js/balance.js').sum;
+var getBalance = require('../js/balance.js').getBalance;
 
-test('sum() with null argument', (assert) => {
-    assert.throws(() => sum(), 'should throw an exception');
+test('getBalance() with null argument', (assert) => {
+    assert.throws(() => getBalance(), 'should throw an exception');
     assert.end();
 });
 
-test('sum() given null', (assert) => {
+test('getBalance() given null', (assert) => {
     assert.throws(function() {
-        sum(null);
+        getBalance(null);
     }, 'should throw an exception');
     assert.end();
 });
 
-test('sum() given object with no credit or debit entries', (assert) => {
+test('getBalance() given object with no credit or debit entries', (assert) => {
     var expected = 0;
 
-    var actual = sum({});
+    var actual = getBalance({});
 
     assert.equal(actual, expected, 'should return 0');
     assert.end();
 });
 
-test('sum() given a single credit entry', (assert) => {
+/* eslint-disable quotes */
+
+test('getBalance() given a single credit entry', (assert) => {
     var expected = 10;
 
-    var actual = sum({
+    var actual = getBalance({
         "credit": [{
             "amount": expected
         }]
@@ -36,11 +37,11 @@ test('sum() given a single credit entry', (assert) => {
     assert.end();
 });
 
-test('sum() given a single debit entry', (assert) => {
+test('getBalance() given a single debit entry', (assert) => {
     var debit = 10;
     var expected = -debit;
 
-    var actual = sum({
+    var actual = getBalance({
         "debit": [{
             "amount": debit
         }]
@@ -50,11 +51,11 @@ test('sum() given a single debit entry', (assert) => {
     assert.end();
 });
 
-test('sum() given equal debit and credit entries', (assert) => {
+test('getBalance() given equal debit and credit entries', (assert) => {
     var amount = 10;
     var expected = 0;
 
-    var actual = sum({
+    var actual = getBalance({
         "debit": [{
             "amount": amount
         }],

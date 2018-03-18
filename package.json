@@ -5,17 +5,19 @@
     "directories": {
         "test": "tests"
     },
-    "dependencies": {},
+    "dependencies": {
+        "jquery": "^3.3.1"
+    },
     "devDependencies": {
         "babel-core": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "babelify": "^8.0.0",
-        "browserify": "^16.1.1",
-        "tape": "^4.9.0"
+        "tape": "^4.9.0",
+        "watchify": "^3.11.0"
     },
     "scripts": {
         "test": "tape tests/*.js",
-        "build": "browserify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]"
+        "watch": "watchify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]"
     },
     "eslintConfig": {
         "env": {
@@ -34,7 +36,9 @@
             ]
         }
     },
-    "eslintIgnore": ["dist"],
+    "eslintIgnore": [
+        "dist"
+    ],
     "author": "Nick Boon",
     "license": "ISC"
 }
