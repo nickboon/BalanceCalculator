@@ -1,35 +1,33 @@
-var test = require('tape');
-var getBalance = require('../js/balance.js').getBalance;
+const test = require('tape');
+const getBalance = require('../js/balance.js').getBalance;
 
-test('getBalance() with null argument', (assert) => {
+test('getBalance() with null argument', assert => {
     assert.throws(() => getBalance(), 'should throw an exception');
     assert.end();
 });
 
-test('getBalance() given null', (assert) => {
+test('getBalance() given null', assert => {
     assert.throws(function() {
         getBalance(null);
     }, 'should throw an exception');
     assert.end();
 });
 
-test('getBalance() given object with no credit or debit entries', (assert) => {
-    var expected = 0;
+test('getBalance() given object with no credit or debit entries', assert => {
+    const expected = 0;
 
-    var actual = getBalance({});
+    const actual = getBalance({});
 
     assert.equal(actual, expected, 'should return 0');
     assert.end();
 });
 
-/* eslint-disable quotes */
+test('getBalance() given a single credit entry', assert => {
+    const expected = 10;
 
-test('getBalance() given a single credit entry', (assert) => {
-    var expected = 10;
-
-    var actual = getBalance({
-        "credit": [{
-            "amount": expected
+    const actual = getBalance({
+        credit: [{
+            amount: expected
         }]
     });
 
@@ -37,13 +35,13 @@ test('getBalance() given a single credit entry', (assert) => {
     assert.end();
 });
 
-test('getBalance() given a single debit entry', (assert) => {
-    var debit = 10;
-    var expected = -debit;
+test('getBalance() given a single debit entry', assert => {
+    const debit = 10;
+    const expected = -debit;
 
-    var actual = getBalance({
-        "debit": [{
-            "amount": debit
+    const actual = getBalance({
+        debit: [{
+            amount: debit
         }]
     });
 
@@ -51,16 +49,16 @@ test('getBalance() given a single debit entry', (assert) => {
     assert.end();
 });
 
-test('getBalance() given equal debit and credit entries', (assert) => {
-    var amount = 10;
-    var expected = 0;
+test('getBalance() given equal debit and credit entries', assert => {
+    const amount = 10;
+    const expected = 0;
 
-    var actual = getBalance({
-        "debit": [{
-            "amount": amount
+    const actual = getBalance({
+        debit: [{
+            amount: amount
         }],
-        "credit": [{
-            "amount": amount
+        credit: [{
+            amount: amount
         }]
     });
 

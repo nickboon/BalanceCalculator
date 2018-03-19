@@ -1,11 +1,11 @@
-var balance = require('./balance.js');
-var tables = require('./tables.js');
-var $ = require('jquery');
+const balance = require('./balance.js');
+const tables = require('./tables.js');
+const $ = require('jquery');
 
-var input = {};
-var balanceTable = $('#balance_table');
+const input = {};
+const balanceTable = $('#balance_table');
 
-var load = () => {
+const load = () => {
     tables.setCurrency('EUR');
 
     input = $('#balance_file_input');
@@ -13,14 +13,14 @@ var load = () => {
     if (input.prop('files').length !== 0) loadBalance();
 };
 
-var loadBalance = () => {
-    var reader = new FileReader();
+const loadBalance = () => {
+    const reader = new FileReader();
     reader.readAsText(input.prop('files')[0]);
     reader.onload = () =>
         displayBalance((JSON.parse(reader.result)));
 };
 
-var displayBalance = (selectedBalance) => {
+const displayBalance = selectedBalance => {
     balanceTable
         .empty()
         .append(tables.getBalanceTableBody(balance.getBalance(selectedBalance)));
