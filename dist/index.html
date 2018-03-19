@@ -12,12 +12,18 @@
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+    <span id="balance_name"></span>
+    <select id="cycle_select">
+        <option value="day">day</option>
+        <option value="week">week</option>
+        <option value="month">month</option>
+        <option value="year">year</option>
+    </select>
+    <div id="balance"></div>
     <form>
-        <input type="file" id="balance_file_input" placeholder="balance.json" autofocus />
+        <input type="file" id="balance_file_input" placeholder="balance.json" />
     </form>
-    <table id="balance_table">
-    </table>
+
     <script src="js/bundle.js"></script>
 </body>
 

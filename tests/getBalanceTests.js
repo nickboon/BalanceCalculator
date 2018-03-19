@@ -1,31 +1,31 @@
 const test = require('tape');
-const getBalance = require('../js/balance.js').getBalance;
+const getBalancePerDay = require('../js/balance.js').getBalancePerDay;
 
-test('getBalance() with null argument', assert => {
-    assert.throws(() => getBalance(), 'should throw an exception');
+test('getBalancePerDay() with null argument', assert => {
+    assert.throws(() => getBalancePerDay(), 'should throw an exception');
     assert.end();
 });
 
-test('getBalance() given null', assert => {
+test('getBalancePerDay() given null', assert => {
     assert.throws(function() {
-        getBalance(null);
+        getBalancePerDay(null);
     }, 'should throw an exception');
     assert.end();
 });
 
-test('getBalance() given object with no credit or debit entries', assert => {
+test('getBalancePerDay() given object with no credit or debit entries', assert => {
     const expected = 0;
 
-    const actual = getBalance({});
+    const actual = getBalancePerDay({});
 
     assert.equal(actual, expected, 'should return 0');
     assert.end();
 });
 
-test('getBalance() given a single credit entry', assert => {
+test('getBalancePerDay() given a single credit entry', assert => {
     const expected = 10;
 
-    const actual = getBalance({
+    const actual = getBalancePerDay({
         credit: [{
             amount: expected
         }]
@@ -35,11 +35,11 @@ test('getBalance() given a single credit entry', assert => {
     assert.end();
 });
 
-test('getBalance() given a single debit entry', assert => {
+test('getBalancePerDay() given a single debit entry', assert => {
     const debit = 10;
     const expected = -debit;
 
-    const actual = getBalance({
+    const actual = getBalancePerDay({
         debit: [{
             amount: debit
         }]
@@ -49,11 +49,11 @@ test('getBalance() given a single debit entry', assert => {
     assert.end();
 });
 
-test('getBalance() given equal debit and credit entries', assert => {
+test('getBalancePerDay() given equal debit and credit entries', assert => {
     const amount = 10;
     const expected = 0;
 
-    const actual = getBalance({
+    const actual = getBalancePerDay({
         debit: [{
             amount: amount
         }],

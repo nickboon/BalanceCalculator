@@ -1,29 +1,46 @@
-const balance = require('./balance.js');
-const tables = require('./tables.js');
 const $ = require('jquery');
+const balance = require('./balance.js');
+const display = require('./display.js');
 
-const input = {};
-const balanceTable = $('#balance_table');
+let input = {};
+let select = {};
+let selectedCycle = 'day';
+let selectedBalance = {};
 
 const load = () => {
-    tables.setCurrency('EUR');
+    display.setCurrency('EUR');
 
-    input = $('#balance_file_input');
-    input.change(loadBalance);
+    select = $('#cycle_select').change(updateCycle);
+    if (select.val()) updateCycle();
+
+    input = $('#balance_file_input').change(loadBalance);
     if (input.prop('files').length !== 0) loadBalance();
+};
+
+const updateCycle = () => {
+    selectedCycle = select.val();
+    refresh();
 };
 
 const loadBalance = () => {
     const reader = new FileReader();
     reader.readAsText(input.prop('files')[0]);
-    reader.onload = () =>
-        displayBalance((JSON.parse(reader.result)));
+    reader.onload = () => updateBalance(JSON.parse(reader.result));
 };
 
-const displayBalance = selectedBalance => {
-    balanceTable
-        .empty()
-        .append(tables.getBalanceTableBody(balance.getBalance(selectedBalance)));
+const updateBalance = (newBalance) => {
+    selectedBalance = newBalance;
+    refresh();
+};
+
+const refresh = () => {
+    $('#balance_name').text(selectedBalance.name);
+
+    let amount = balance.getBalancePerDay(selectedBalance);
+    if (selectedCycle != 'day')
+        amount = balance.getAmountPerCycle(selectedCycle, amount);
+
+    $('#balance').text(display.currencyString(amount));
 };
 
 $(() => load());

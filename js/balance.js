@@ -22,7 +22,7 @@ const getAmountPerDay = entry => {
     return entry.amount / (numberOfDaysInCycle * numberOfCycles);
 };
 
-const getBalance = entries => {
+const getBalancePerDay = entries => {
     if (typeof entries != 'object')
         throw 'entries must be an object.';
 
@@ -37,5 +37,5 @@ const getBalance = entries => {
 module.exports = {
     getAmountPerCycle: getAmountPerCycle,
     getAmountPerDay: getAmountPerDay,
-    getBalance: getBalance
+    getBalancePerDay: getBalancePerDay
 };

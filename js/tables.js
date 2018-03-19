@@ -1,9 +1,6 @@
 const balance = require('./balance.js');
 const $ = require('jquery');
-
-const currency = 'EUR';
-
-const setCurrency = newCurrency => currency = newCurrency;
+const currencyString = require('./display.js').currencyString;
 
 const getBalanceTableBody = amountPerDay => {
     const tbody = $(document.createElement('tbody'));
@@ -14,24 +11,20 @@ const getBalanceTableBody = amountPerDay => {
     return tbody;
 };
 
-const getBalanceRow = (period, amountPerDay) => {
+const getBalanceRow = (cycle, amountPerDay) => {
     const row = $(document.createElement('tr'));
-    getAmountField(period, amountPerDay).appendTo(row);
-    $('<td>', { text: `per ${period}` }).appendTo(row);
+    getAmountField(cycle, amountPerDay).appendTo(row);
+    $('<td>', { text: `per ${cycle}` }).appendTo(row);
     return row;
 };
 
-const getAmountField = (period, amountPerDay) => {
+const getAmountField = (cycle, amountPerDay) => {
     var amount = 0;
-    if (period === 'day') amount = amountPerDay;
-    else amount = balance.getAmountPerCycle(period, amountPerDay);
-    return $('<td>', { text: toCurrencyString(amount) });
+    if (cycle === 'day') amount = amountPerDay;
+    else amount = balance.getAmountPerCycle(cycle, amountPerDay);
+    return $('<td>', { text: currencyString(amount) });
 };
 
-const toCurrencyString = amount =>
-    amount.toLocaleString('en', { style: 'currency', currency: currency });
-
 module.exports = {
-    setCurrency: setCurrency,
     getBalanceTableBody: getBalanceTableBody
 };
