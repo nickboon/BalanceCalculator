@@ -3,6 +3,7 @@ nicks.balance.json
 
 # Built
 dist/js
+tests/dom/js
 
 # Third party
 dist/css/normalize*

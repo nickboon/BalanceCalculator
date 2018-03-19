@@ -1,18 +1,29 @@
 var balance = require('./balance.js');
+var tables = require('./tables.js');
 var $ = require('jquery');
 
-$(() => $('#balance_file_input').change(loadBalance));
+var input = {};
+var balanceTable = $('#balance_table');
 
-var loadBalance = function(event) {
+var load = () => {
+    tables.setCurrency('EUR');
+
+    input = $('#balance_file_input');
+    input.change(loadBalance);
+    if (input.prop('files').length !== 0) loadBalance();
+};
+
+var loadBalance = () => {
     var reader = new FileReader();
-    reader.readAsText(event.target.files[0]);
+    reader.readAsText(input.prop('files')[0]);
     reader.onload = () =>
-        displayBalance(balance.getBalance(JSON.parse(reader.result)));
+        displayBalance((JSON.parse(reader.result)));
 };
 
-var displayBalance = function(dailyBalance) {
-    console.log('Daily: ' + dailyBalance);
-    console.log('Weekly: ' + balance.getAmountPerCycle('week', dailyBalance));
-    console.log('Monthly: ' + balance.getAmountPerCycle('month', dailyBalance));
-    console.log('Yearly: ' + balance.getAmountPerCycle('year', dailyBalance));
+var displayBalance = (selectedBalance) => {
+    balanceTable
+        .empty()
+        .append(tables.getBalanceTableBody(balance.getBalance(selectedBalance)));
 };
+
+$(() => load());

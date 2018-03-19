@@ -12,12 +12,15 @@
         "babel-core": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "babelify": "^8.0.0",
+        "jsdom": "^11.6.2",
         "tape": "^4.9.0",
         "watchify": "^3.11.0"
     },
     "scripts": {
+        "start": "start ./dist/index.html",
         "test": "tape tests/*.js",
-        "watch": "watchify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]"
+        "watch": "watchify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]",
+        "build.fixtures": "browserify tests/dom/test.app.js -o tests/dom/js/test.bundle.js -t [ babelify --presets [ env ] ]"
     },
     "eslintConfig": {
         "env": {
