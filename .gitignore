@@ -6,7 +6,7 @@ dist/js
 tests/dom/js
 
 # Third party
-dist/css/normalize*
+dist/css/bootstrap*
 
 # Windows image file caches
 Thumbs.db

@@ -1,3 +1,4 @@
+require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js');
 const $ = require('jquery');
 const balance = require('./balance.js');
 const display = require('./display.js');

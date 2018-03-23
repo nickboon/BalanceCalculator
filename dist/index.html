@@ -6,23 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Balance Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/cover.css">
 </head>
 
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <span id="balance_name"></span>
-    <select id="cycle_select">
-        <option value="day">day</option>
-        <option value="week">week</option>
-        <option value="month">month</option>
-        <option value="year">year</option>
-    </select>
-    <div id="balance"></div>
-    <form>
-        <input type="file" id="balance_file_input" placeholder="balance.json" />
-    </form>
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">GetBalance</h3>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <form>
+                <div>
+                    <span id="balance_name">My balance</span> per
+                    <select id="cycle_select" class="custom-select">
+                        <option value="day">day</option>
+                        <option value="week">week</option>
+                        <option value="month">month</option>
+                        <option value="year">year</option>
+                    </select>
+                </div>
+                <textarea id="balance" rows="1" readonly></textarea>
+                <div class="custom-file">
+                    <input type="file" id="balance_file_input" class="custom-file-input" placeholder="balance.json" />
+                    <label class="custom-file-label btn" for="balance_file_input">Load New Balance</label>
+                </div>
+            </form>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <adress class="inner">
+                <p>&copy;<a href="https://github.com/nickboon">Nick Boon</a> 2017.</p>
+                </address>
+        </footer>
+    </div>
 
     <script src="js/bundle.js"></script>
 </body>
