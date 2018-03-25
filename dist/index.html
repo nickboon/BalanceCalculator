@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/cover.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 </head>
 
 <body>
@@ -16,14 +17,14 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex h-100  flex-column">
         <header class="masthead mb-auto">
-            <div class="inner">
+            <div class="inner mx-auto">
                 <h3 class="masthead-brand">GetBalance</h3>
             </div>
         </header>
 
-        <main role="main" class="inner cover">
+        <main role="main" class="inner cover mx-auto">
             <form>
                 <div>
                     <span id="balance_name">My balance</span> per
@@ -34,18 +35,19 @@
                         <option value="year">year</option>
                     </select>
                 </div>
-                <textarea id="balance" rows="1" readonly></textarea>
+                <div id="balance">
+                </div>
                 <div class="custom-file">
-                    <input type="file" id="balance_file_input" class="custom-file-input" placeholder="balance.json" />
-                    <label class="custom-file-label btn" for="balance_file_input">Load New Balance</label>
+                    <input type="file" id="balance_file_input" class="custom-file-input" placeholder="balance.json" autofocus/>
+                    <label class="custom-file-label  btn" for="balance_file_input">Load New Balance</label>
                 </div>
             </form>
         </main>
 
         <footer class="mastfoot mt-auto">
-            <adress class="inner">
-                <p>&copy;<a href="https://github.com/nickboon">Nick Boon</a> 2017.</p>
-                </address>
+            <div class="inner mx-auto">
+                <address>&copy;<a href="https://github.com/nickboon">Nick Boon</a> 2018.</address>
+            </div>
         </footer>
     </div>
 
