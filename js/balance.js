@@ -24,7 +24,7 @@ const getAmountPerDay = entry => {
 
 const getBalancePerDay = entries => {
     if (typeof entries != 'object')
-        throw 'entries must be an object.';
+        throw 'Entries must be an object.';
 
     let balance = 0;
     if (entries.credit)

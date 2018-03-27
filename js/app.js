@@ -42,6 +42,7 @@ const refresh = () => {
         amount = balance.getAmountPerCycle(selectedCycle, amount);
 
     $('#balance').text(display.currencyString(amount));
+    $('#balance').css('color', `rgb(${display.getBalanceColour(amount)})`);
 };
 
 $(() => load());
