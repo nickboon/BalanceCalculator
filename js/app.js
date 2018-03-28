@@ -1,48 +1,43 @@
 require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js');
 const $ = require('jquery');
-const balance = require('./balance.js');
 const display = require('./display.js');
 
-let input = {};
-let select = {};
-let selectedCycle = 'day';
-let selectedBalance = {};
+let cycleSelect = {};
+let sheetInput = {};
 
 const load = () => {
-    display.setCurrency('EUR');
+    cycleSelect = $('#cycle_select')
+        .change(setCycle);
 
-    select = $('#cycle_select').change(updateCycle);
-    if (select.val()) updateCycle();
+    sheetInput = $('#balance_file_input')
+        .change(loadSheet);
 
-    input = $('#balance_file_input').change(loadBalance);
-    if (input.prop('files').length !== 0) loadBalance();
+    if (cycleSelect.val()) setCycle();
+    if (sheetInput.prop('files').length !== 0)
+        loadSheet();
 };
 
-const updateCycle = () => {
-    selectedCycle = select.val();
+const setCycle = () => {
+    display.setCycle(cycleSelect.val());
     refresh();
 };
 
-const loadBalance = () => {
+const loadSheet = () => {
     const reader = new FileReader();
-    reader.readAsText(input.prop('files')[0]);
-    reader.onload = () => updateBalance(JSON.parse(reader.result));
+    reader.readAsText(
+        sheetInput.prop('files')[0]
+    );
+    reader.onload = () => setSheet(JSON.parse(reader.result));
 };
 
-const updateBalance = (newBalance) => {
-    selectedBalance = newBalance;
+const setSheet = (sheet) => {
+    display.setSheet(sheet);
     refresh();
 };
 
 const refresh = () => {
-    $('#balance_name').text(selectedBalance.name);
-
-    let amount = balance.getBalancePerDay(selectedBalance);
-    if (selectedCycle != 'day')
-        amount = balance.getAmountPerCycle(selectedCycle, amount);
-
-    $('#balance').text(display.currencyString(amount));
-    $('#balance').css('color', `rgb(${display.getBalanceColour(amount)})`);
+    display.sheetName($('#balance_name'));
+    display.sum($('#balance'));
 };
 
 $(() => load());

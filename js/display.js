@@ -1,24 +1,38 @@
-let currency = 'EUR';
-const setCurrency = newCurrency => currency = newCurrency;
+require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js');
+const $ = require('jquery');
+const calculate = require('./calculate.js');
+const colour = require('./colours.js');
 
-const currencyString = amount =>
-    amount.toLocaleString('en', { style: 'currency', currency: currency });
+let selectedSheet = {};
+let selectedCycle = 'day';
 
-const getBalanceColour = function(amount) {
-    if (typeof amount != 'number')
-        throw 'Amount must be a number.';
+const setSheet = (sheet) => selectedSheet = sheet;
 
-    if (amount > 0)
-        return [128, 192, 128];
-    else if (amount < 0)
-        return [192, 128, 128];
+const setCycle = (cycle) => selectedCycle = cycle;
 
-    return [128, 128, 128];
+const displaySheetName = (element) => element.text(selectedSheet.name);
 
+const displaySum = (element) => {
+    let amount = calculate.sumPerDay(selectedSheet);
+
+    if (selectedCycle !== 'day')
+        amount = calculate.amountPerCycle(selectedCycle, amount);
+
+    element.text(currencyString(amount));
+    element.css(
+        'color',
+        `rgb(${colour(amount)})`
+    );
 };
 
+const currencyString = amount =>
+    amount.toLocaleString(
+        'en', { style: 'currency', currency: selectedSheet.currency || 'EUR' }
+    );
+
 module.exports = {
-    setCurrency: setCurrency,
-    currencyString: currencyString,
-    getBalanceColour: getBalanceColour
+    setSheet: setSheet,
+    setCycle: setCycle,
+    sheetName: displaySheetName,
+    sum: displaySum
 };

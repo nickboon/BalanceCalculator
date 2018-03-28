@@ -4,7 +4,7 @@ const numberOfDaysIn = {
     week: 7
 };
 
-const getAmountPerCycle = (cycle, amountPerDay) => {
+const amountPerCycle = (cycle, amountPerDay) => {
     if (typeof cycle != 'string' || typeof amountPerDay != 'number')
         throw 'Cycle must be a string, and days must be a number.';
     if (numberOfDaysIn[cycle] == undefined)
@@ -13,7 +13,7 @@ const getAmountPerCycle = (cycle, amountPerDay) => {
     return amountPerDay * numberOfDaysIn[cycle];
 };
 
-const getAmountPerDay = entry => {
+const amountPerDay = entry => {
     if (typeof entry.amount != 'number')
         throw 'Entry must have an amount, and it must be a number.';
 
@@ -22,20 +22,19 @@ const getAmountPerDay = entry => {
     return entry.amount / (numberOfDaysInCycle * numberOfCycles);
 };
 
-const getBalancePerDay = entries => {
+const sumPerDay = entries => {
     if (typeof entries != 'object')
         throw 'Entries must be an object.';
 
-    let balance = 0;
+    let sum = 0;
     if (entries.credit)
-        entries.credit.forEach(entry => balance += getAmountPerDay(entry));
+        entries.credit.forEach(entry => sum += amountPerDay(entry));
     if (entries.debit)
-        entries.debit.forEach(entry => balance -= getAmountPerDay(entry));
-    return balance;
+        entries.debit.forEach(entry => sum -= amountPerDay(entry));
+    return sum;
 };
 
 module.exports = {
-    getAmountPerCycle: getAmountPerCycle,
-    getAmountPerDay: getAmountPerDay,
-    getBalancePerDay: getBalancePerDay
+    amountPerCycle: amountPerCycle,
+    sumPerDay: sumPerDay
 };
