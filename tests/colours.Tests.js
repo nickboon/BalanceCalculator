@@ -1,8 +1,28 @@
 const test = require('tape');
-const colour = require('../js/colours.js');
+const colours = require('../js/colours.js');
+const colour = require('../js/colour.js');
+const buildColourToRatio = colours.buildColourToRatio;
+const ratioNotInRangeError = 'Ratio must be betweeen 0 and 1.';
+const unknownColourError = 'Unknown colour "unknownColour".';
 const amountNotNumberError = 'Amount must be a number.';
 
-test('colour() given an undefined amount ', assert => {
+test('buildColourToRatio() given an unknown colour', assert => {
+    assert.throws(
+        () => buildColourToRatio('red', 2),
+        RegExp(ratioNotInRangeError),
+        `should throw ${ratioNotInRangeError}`);
+    assert.end();
+});
+
+test('buildColourToRatio() given an unknown colour', assert => {
+    assert.throws(
+        () => buildColourToRatio('unknownColour', 1),
+        RegExp(unknownColourError),
+        `should throw ${unknownColourError}`);
+    assert.end();
+});
+
+test('colour() given an undefined amount', assert => {
     assert.throws(
         () => colour(),
         RegExp(amountNotNumberError),
@@ -12,21 +32,24 @@ test('colour() given an undefined amount ', assert => {
 
 test('colour() given 0', assert => {
     assert.isEquivalent(
-        colour(0), [128, 128, 128],
+        colour(0),
+        colours.zeroBalance,
         'should return default zero balance colour');
     assert.end();
 });
 
 test('colour() given a positive amount', assert => {
     assert.isEquivalent(
-        colour(1), [64, 192, 64],
+        colour(1),
+        colours.defaultCredit,
         'should return default credit colour');
     assert.end();
 });
 
 test('colour() given a negative amount', assert => {
     assert.isEquivalent(
-        colour(-1), [192, 64, 64],
+        colour(-1),
+        colours.defaultDebit,
         'should return default debit colour.');
     assert.end();
 });
@@ -34,14 +57,16 @@ test('colour() given a negative amount', assert => {
 
 test('colour() given a max argument and an amount equal to max', assert => {
     assert.isEquivalent(
-        colour(1, 1), [0, 256, 0],
+        colour(1, 1),
+        colours.maxCredit,
         'should return the max credit colour');
     assert.end();
 });
 
 test('colour() given a max argument only and an amount equal to negative max', assert => {
     assert.isEquivalent(
-        colour(-1, 1), [256, 0, 0],
+        colour(-1, 1),
+        colours.maxDebit,
         'should return the max debit colour');
     assert.end();
 });

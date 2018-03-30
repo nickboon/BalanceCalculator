@@ -2,43 +2,31 @@ const baseColour = 128;
 const maxColour = 256;
 const midColour = (maxColour + baseColour) / 2;
 
-const buildRed = (red, other) => [red, other, other];
-const buildGreen = (green, other) => [other, green, other];
-const buildGrey = colour => [colour, colour, colour];
-const buildColourToRatio = (builder, ratio) => {
+const build = {
+    red: (red, other) => [red, other, other],
+    green: (green, other) => [other, green, other],
+    grey: colour => [colour, colour, colour],
+};
+
+const buildColourToRatio = (colour, ratio) => {
+    if (typeof ratio !== 'number' || ratio < 0 || ratio > 1)
+        throw 'Ratio must be betweeen 0 and 1.';
+
+    if (typeof build[colour] !== 'function') throw `Unknown colour "${colour}".`;
+
     const range = maxColour - baseColour;
 
-    return builder(
+    return build[colour](
         baseColour + range * ratio,
         baseColour - baseColour * ratio
     );
 };
 
-const maxCreditColour = buildGreen(maxColour, 0);
-const maxDebitColour = buildRed(maxColour, 0);
-const defaultCreditColour = buildColourToRatio(buildGreen, 0.5);
-const defaultDebitColour = buildColourToRatio(buildRed, 0.5);
-const zeroBalanceColour = buildGrey(baseColour);
-
-const calculateAmountColour = (amount, max, min) => {
-    if (typeof amount != 'number') throw 'Amount must be a number.';
-
-    if (max) return calculateColourToRatio(amount, max, min);
-    if (amount > 0) return defaultCreditColour;
-    if (amount < 0) return defaultDebitColour;
-
-    return zeroBalanceColour;
+module.exports = {
+    maxCredit: build['green'](maxColour, 0),
+    maxDebit: build['red'](maxColour, 0),
+    defaultCredit: buildColourToRatio('green', 0.5),
+    defaultDebit: buildColourToRatio('red', 0.5),
+    zeroBalance: build['grey'](baseColour),
+    buildColourToRatio: buildColourToRatio
 };
-
-const calculateColourToRatio = (amount, max, min) => {
-    min = min || -max;
-
-    if (amount >= max) return maxCreditColour;
-    if (amount > 0) return buildColourToRatio(buildGreen, amount / max);
-    if (amount <= min) return maxDebitColour;
-    if (amount < 0) return buildColourToRatio(buildRed, amount / min);
-
-    return zeroBalanceColour;
-};
-
-module.exports = calculateAmountColour;
