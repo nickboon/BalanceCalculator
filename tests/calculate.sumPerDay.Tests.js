@@ -1,24 +1,26 @@
 const test = require('tape');
-const sumPerDay = require('../js/calculate.js')
-    .sumPerDay;
+const sumPerDay = require('../js/calculate.js').sumPerDay;
+const sheetNotObjectError = 'Sheet must be an object.';
 
-test('sumPerDay() with null argument', assert => {
+test('sumPerDay() given an undefined sheet', assert => {
     assert.throws(
         () => sumPerDay(),
-        'should throw an exception'
+        RegExp(sheetNotObjectError),
+        `should throw ${sheetNotObjectError}`
     );
     assert.end();
 });
 
-test('sumPerDay() given null', assert => {
+test('sumPerDay() given a null sheet', assert => {
     assert.throws(
         function() { sumPerDay(null); },
-        'should throw an exception'
+        RegExp(sheetNotObjectError),
+        `should throw ${sheetNotObjectError}`
     );
     assert.end();
 });
 
-test('sumPerDay() given object with no credit or debit entries', assert => {
+test('sumPerDay() given an empty sheet', assert => {
     assert.equal(
         sumPerDay({}),
         0,
