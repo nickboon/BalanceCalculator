@@ -1,6 +1,6 @@
 require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js');
 const $ = require('jquery');
-const calculate = require('./calculate.js');
+const calculate = require('./cycles.js');
 const colour = require('./colours.js');
 
 let selectedSheet = {};

@@ -1,5 +1,5 @@
 const test = require('tape');
-const sumPerDay = require('../js/calculate.js').sumPerDay;
+const sumPerDay = require('../js/cycles.js').sumPerDay;
 const sheetNotObjectError = 'Sheet must be an object.';
 
 test('sumPerDay() given an undefined sheet', assert => {
