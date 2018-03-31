@@ -14,19 +14,19 @@ const setBaseTextColour = elements => elements.forEach(element => colourElement(
 const displaySheetName = element => element.text(selectedSheet.name);
 
 const displayEntries = element => {
-    const entries = {
-        credit: selectedSheet.credit
-            .filter(entry => entry.description !== 'target')
-            .map(entry => {
-                return {
-                    amount: currencyString(entry.amount),
-                    description: entry.description
-                };
-            })
-    };
+    const entries = {};
+    if (selectedSheet.credit)
+        entries.credit = toEntriesViewModel(selectedSheet.credit);
+
     element.html(Mustache.render($('#entries_template').html(), entries));
 };
 
+const toEntriesViewModel = (entries) => entries
+    .filter(entry => entry.description !== 'target')
+    .map(entry => ({
+        amount: currencyString(entry.amount),
+        description: entry.description
+    }));
 
 const displaySum = (element) => {
     let amount = calculate.sumPerDay(selectedSheet);

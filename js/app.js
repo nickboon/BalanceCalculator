@@ -4,7 +4,6 @@ const display = require('./display.js');
 
 let cycleSelect = {};
 let sheetInput = {};
-let isSheetLoaded = false;
 
 const load = () => {
     cycleSelect = $('#cycle_select').change(setCycle);
@@ -40,13 +39,10 @@ const loadSheet = () => {
 
 const setSheet = (sheet) => {
     display.setSheet(sheet);
-    isSheetLoaded = true;
     refresh();
 };
 
 const refresh = () => {
-    if (!isSheetLoaded) return;
-
     display.sheetName($('#sheet_name'));
     display.entries($('#entries'));
     display.sum($('#sum'));
