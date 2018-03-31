@@ -3,7 +3,7 @@ nicks.balance.json
 
 # Built
 dist/js
-tests/dom/js
+tests/e2e/js
 
 # Third party
 dist/css/bootstrap*
