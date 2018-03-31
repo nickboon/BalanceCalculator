@@ -27,19 +27,18 @@ const displayEntries = element => {
 const toEntriesViewModel = (entries) => entries
     .filter(entry => entry.description !== 'target')
     .map(entry => ({
-        amount: currencyString(entry.amount),
+        amount: currencyString(
+            calculate.amountPerCycle(
+                selectedCycle,
+                calculate.amountPerDay(entry)
+            )),
         description: entry.description
     }));
 
 const displaySum = (element) => {
     let amount = calculate.sumPerDay(selectedSheet);
-
     colourBalanceElementBorder(element, amount);
-
-    if (selectedCycle !== 'day')
-        amount = calculate.amountPerCycle(selectedCycle, amount);
-
-    element.text(currencyString(amount));
+    element.text(currencyString(calculate.amountPerCycle(selectedCycle, amount)));
 };
 
 const colourBalanceElement = (element, amount) => {

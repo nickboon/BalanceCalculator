@@ -7,6 +7,9 @@ const numberOfDaysIn = {
 const amountPerCycle = (cycle, amountPerDay) => {
     if (typeof cycle !== 'string' || typeof amountPerDay !== 'number')
         throw 'Cycle must be a string, and days must be a number.';
+
+    if (cycle == 'day') return amountPerDay;
+
     if (numberOfDaysIn[cycle] == undefined)
         throw `Unknown cycle "${cycle}".`;
 
