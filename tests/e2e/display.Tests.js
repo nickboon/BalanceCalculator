@@ -31,7 +31,7 @@ const setUpDomFixture = () => {
     const document = dom.window.document;
 
     const script = document.createElement('script');
-    script.textContent = fs.readFileSync('tests/dom/js/test.bundle.js', 'utf8');
+    script.textContent = fs.readFileSync('tests/e2e/js/test.bundle.js', 'utf8');
     document.body.appendChild(script);
 
     return dom;
