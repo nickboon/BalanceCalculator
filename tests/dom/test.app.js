@@ -1,14 +1,7 @@
-const getBalancePerDay = require('../../js/balance.js').getBalancePerDay;
-const tables = require('../../js/tables.js');
 const $ = require('jquery');
-const testBalance = require('../fixtures.js').balance;
+const display = require('../../js/display.js');
+const sheet = require('../fixtures.js').sheet;
 
-const balanceTable = $('#balance_table');
-
-const displayBalance = selectedBalance => {
-    balanceTable
-        .empty()
-        .append(tables.getBalanceTableBody(getBalancePerDay(selectedBalance)));
-};
-
-displayBalance(testBalance);
+display.setCycle('month');
+display.setSheet(sheet);
+display.entries($('#entries'));

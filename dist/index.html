@@ -28,7 +28,7 @@
         <main role="main" class="inner cover mx-auto">
             <form>
                 <div>
-                    <span id="balance_name">My balance</span> per
+                    <span id="sheet_name">My balance</span> per
                     <select id="cycle_select" class="custom-select">
                         <option value="day">day</option>
                         <option value="week">week</option>
@@ -36,11 +36,14 @@
                         <option value="year">year</option>
                     </select>
                 </div>
-                <div id="balance">
-                </div>
+
+                <div id="entries"></div>
+
+                <div id="sum"></div>
+
                 <div class="custom-file">
-                    <input type="file" id="balance_file_input" class="custom-file-input" placeholder="balance.json" autofocus/>
-                    <label class="custom-file-label  btn" for="balance_file_input">Load New Balance</label>
+                    <input type="file" id="sheet_input" class="custom-file-input" placeholder="balance.json" autofocus/>
+                    <label class="custom-file-label  btn" for="sheet_input">Load New Balance</label>
                 </div>
             </form>
         </main>
@@ -52,7 +55,17 @@
         </footer>
     </div>
 
+    <script id="entries_template" type="text/template">
+        <table id="credit_table">
+            {{#credit}}
+            <tr>
+                <td>{{description}}</td>
+                <td>{{amount}}</td>
+            </tr>
+            {{/credit}}
+        </table>
+    </script>
     <script src="js/bundle.js"></script>
 </body>
 
-</html>
+</html

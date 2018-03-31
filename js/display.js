@@ -1,16 +1,33 @@
 require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js');
 const $ = require('jquery');
+const Mustache = require('mustache');
 const calculate = require('./cycles.js');
-const colour = require('./colours.js');
+const colour = require('./colour.js');
 
 let selectedSheet = {};
 let selectedCycle = 'day';
-
 const setSheet = sheet => selectedSheet = sheet;
 const setCycle = cycle => selectedCycle = cycle;
 
 const setBaseTextColour = elements => elements.forEach(element => colourElement(element, 0));
+
 const displaySheetName = element => element.text(selectedSheet.name);
+
+const displayEntries = element => {
+    const entries = {
+        credit: selectedSheet.credit
+            .filter(entry => entry.description !== 'target')
+            .map(entry => {
+                return {
+                    amount: currencyString(entry.amount),
+                    description: entry.description
+                };
+            })
+    };
+    element.html(Mustache.render($('#entries_template').html(), entries));
+};
+
+
 const displaySum = (element) => {
     let amount = calculate.sumPerDay(selectedSheet);
 
@@ -55,7 +72,6 @@ const getTargetAmountPerDayFor = (entries) => {
     if (targetEntry) return calculate.amountPerDay(targetEntry);
 };
 
-
 const currencyString = amount => amount.toLocaleString(
     'en', { style: 'currency', currency: selectedSheet.currency || 'EUR' }
 );
@@ -65,5 +81,6 @@ module.exports = {
     setCycle: setCycle,
     setBaseTextColour: setBaseTextColour,
     sheetName: displaySheetName,
+    entries: displayEntries,
     sum: displaySum
 };

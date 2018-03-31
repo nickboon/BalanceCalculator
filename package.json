@@ -1,50 +1,52 @@
 {
-    "name": "balance-calculator",
-    "version": "1.0.0",
-    "description": "App for working out how much money I have left.",
-    "directories": {
-        "test": "tests"
+  "name": "balance-calculator",
+  "version": "1.0.0",
+  "description": "App for working out how much money I have left.",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "mustache": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "bootstrap": "^4.0.0",
+    "jsdom": "^11.6.2",
+    "npm-assets": "^0.1.2",
+    "tape": "^4.9.0",
+    "watchify": "^3.11.0"
+  },
+  "scripts": {
+    "start": "start ./dist/index.html",
+    "test": "tape tests/*.js",
+    "test.e2e": "npm run build.fixtures && tape tests/dom/*.Tests.js",
+    "watch": "watchify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]",
+    "build.fixtures": "browserify tests/dom/test.app.js -o tests/dom/js/test.bundle.js -t [ babelify --presets [ env ] ]",
+    "postinstall": "npm-assets ."
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
     },
-    "dependencies": {
-        "jquery": "^3.3.1"
-    },
-    "devDependencies": {
-        "babel-core": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
-        "babelify": "^8.0.0",
-        "bootstrap": "^4.0.0",
-        "jsdom": "^11.6.2",
-        "npm-assets": "^0.1.2",
-        "tape": "^4.9.0",
-        "watchify": "^3.11.0"
-    },
-    "scripts": {
-        "start": "start ./dist/index.html",
-        "test": "tape tests/*.js",
-        "watch": "watchify js/app.js -o dist/js/bundle.js -t [ babelify --presets [ env ] ]",
-        "build.fixtures": "browserify tests/dom/test.app.js -o tests/dom/js/test.bundle.js -t [ babelify --presets [ env ] ]",
-        "postinstall": "npm-assets ."
-    },
-    "eslintConfig": {
-        "env": {
-            "browser": true,
-            "node": true,
-            "es6": true
-        },
-        "rules": {
-            "quotes": [
-                "error",
-                "single"
-            ],
-            "semi": [
-                "error",
-                "always"
-            ]
-        }
-    },
-    "eslintIgnore": [
-        "dist"
-    ],
-    "author": "Nick Boon",
-    "license": "ISC"
+    "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "dist"
+  ],
+  "author": "Nick Boon",
+  "license": "ISC"
 }

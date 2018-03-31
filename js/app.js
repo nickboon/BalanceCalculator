@@ -4,17 +4,17 @@ const display = require('./display.js');
 
 let cycleSelect = {};
 let sheetInput = {};
+let isSheetLoaded = false;
 
 const load = () => {
     cycleSelect = $('#cycle_select').change(setCycle);
 
-    sheetInput = $('#balance_file_input').change(loadSheet);
+    sheetInput = $('#sheet_input').change(loadSheet);
 
     setBaseTextColour();
 
     if (cycleSelect.val()) setCycle();
-    if (sheetInput.prop('files').length !== 0)
-        loadSheet();
+    if (sheetInput.prop('files').length !== 0) loadSheet();
 };
 
 const setBaseTextColour = () =>
@@ -40,12 +40,16 @@ const loadSheet = () => {
 
 const setSheet = (sheet) => {
     display.setSheet(sheet);
+    isSheetLoaded = true;
     refresh();
 };
 
 const refresh = () => {
-    display.sheetName($('#balance_name'));
-    display.sum($('#balance'));
+    if (!isSheetLoaded) return;
+
+    display.sheetName($('#sheet_name'));
+    display.entries($('#entries'));
+    display.sum($('#sum'));
 };
 
 $(() => load());

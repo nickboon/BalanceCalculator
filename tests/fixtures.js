@@ -1,18 +1,32 @@
-const balance = {
-    credit: [{
-        amount: 7,
-        cycle: 'week'
+const sheet = {
+    'name': 'Test Balance',
+    'credit': [{
+        'description': 'Salary after tax',
+        'amount': 0,
+        'cycle': 'month'
+    }, {
+        'description': 'target',
+        'amount': 1000,
+        'cycle': 'month'
+    }],
+    'debit': [{
+        'description': 'Wi-fi bill',
+        'amount': 1000,
+        'every': 1,
+        'cycle': 'month'
     }]
 };
 
-const balanceTableBody = [
-    '€1.00', 'per day',
-    '€7.00', 'per week',
-    '€30.44', 'per month',
-    '€365.25', 'per year'
+const creditCells = [
+    'Salary after tax', '€0.00'
+];
+
+const debitCells = [
+    'Wi-fi bill', '€1000.00'
 ];
 
 module.exports = {
-    balance: balance,
-    balanceTableBody: balanceTableBody,
+    sheet: sheet,
+    creditCells: creditCells,
+    debitCells: debitCells
 };
