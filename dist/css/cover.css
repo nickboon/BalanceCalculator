@@ -185,6 +185,27 @@ body {
 
 
 /*
+ * Tables
+ */
+
+table {
+    width: 100%;
+}
+
+tr {
+    padding: 1rem 0;
+}
+
+#entries {
+    margin: 2rem 0;
+}
+
+#entries td:last-child {
+    text-align: right;
+}
+
+
+/*
  * Footer
  */
 
