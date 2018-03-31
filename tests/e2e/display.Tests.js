@@ -6,22 +6,22 @@ const wellKnown = require('../fixtures.js');
 // display.entries is called in test.app.js
 test('display.entries()', assert => {
     assert.isEquivalent(
-        getCells(setUpDomFixture().window.document.getElementById('entries')),
+        getCells(setUpDomFixture().window.document.getElementById('credit_table')),
         wellKnown.creditCells,
         'should display the expected credit cells');
     assert.end();
 });
 
-// display.entries is called in test.app.js
-// test('display.entries()', assert => {
-//     const document = setUpDomFixture().window.document;
+//display.entries is called in test.app.js
+test('display.entries()', assert => {
+    const document = setUpDomFixture().window.document;
 
-//     assert.isEquivalent(
-//         getCells(document.getElementById('debit_table')),
-//         wellKnown.debitCells,
-//         'should display the expected debit cells');
-//     assert.end();
-// });
+    assert.isEquivalent(
+        getCells(document.getElementById('debit_table')),
+        wellKnown.debitCells,
+        'should display the expected debit cells');
+    assert.end();
+});
 
 
 

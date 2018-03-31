@@ -150,6 +150,8 @@ var displayEntries = function displayEntries(element) {
     var entries = {};
     if (selectedSheet.credit) entries.credit = toEntriesViewModel(selectedSheet.credit);
 
+    if (selectedSheet.debit) entries.debit = toEntriesViewModel(selectedSheet.debit);
+
     element.html(Mustache.render($('#entries_template').html(), entries));
 };
 
@@ -17584,7 +17586,7 @@ var sheet = {
 
 var creditCells = ['Salary after tax', '€0.00'];
 
-var debitCells = ['Wi-fi bill', '€1000.00'];
+var debitCells = ['Wi-fi bill', '€1,000.00'];
 
 module.exports = {
     sheet: sheet,

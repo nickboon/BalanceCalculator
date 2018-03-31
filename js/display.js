@@ -18,6 +18,9 @@ const displayEntries = element => {
     if (selectedSheet.credit)
         entries.credit = toEntriesViewModel(selectedSheet.credit);
 
+    if (selectedSheet.debit)
+        entries.debit = toEntriesViewModel(selectedSheet.debit);
+
     element.html(Mustache.render($('#entries_template').html(), entries));
 };
 

@@ -22,7 +22,7 @@ const creditCells = [
 ];
 
 const debitCells = [
-    'Wi-fi bill', '€1000.00'
+    'Wi-fi bill', '€1,000.00'
 ];
 
 module.exports = {

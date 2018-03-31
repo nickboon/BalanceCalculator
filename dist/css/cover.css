@@ -183,6 +183,14 @@ body {
     border-radius: .7rem;
 }
 
+h1 {
+    font-size: 1.3rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
 
 /*
  * Tables
@@ -190,10 +198,11 @@ body {
 
 table {
     width: 100%;
+    margin-bottom: 1rem;
 }
 
-tr {
-    padding: 1rem 0;
+#credit_table td {
+    padding-bottom: 1rem;
 }
 
 #entries {
