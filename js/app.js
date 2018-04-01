@@ -10,6 +10,8 @@ const load = () => {
 
     sheetInput = $('#sheet_input').change(loadSheet);
 
+    display.setEntriesToggleClick($('#entries_toggle'), $('#entries'));
+
     setBaseTextColour();
 
     if (cycleSelect.val()) setCycle();

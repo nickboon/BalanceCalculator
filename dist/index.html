@@ -37,10 +37,14 @@
                     </select>
                 </h1>
 
-                <div id="entries"></div>
+                <div id="entries" class="collapse"></div>
 
-                <div id="sum"></div>
-
+                <div id="sum">
+                    <span></span>
+                    <span id="entries_toggle" data-toggle="collapse" class="arrow-up" href="#entries" role="button" aria-expanded="false" aria-controls="entries">
+                        <!-- <span id="entries_toggle" class="arrow-up"></span> -->
+                    </span>
+                </div>
                 <div class="custom-file">
                     <input type="file" id="sheet_input" class="custom-file-input" placeholder="balance.json" autofocus/>
                     <label class="custom-file-label  btn" for="sheet_input">Load New Balance</label>

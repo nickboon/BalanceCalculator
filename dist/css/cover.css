@@ -183,6 +183,11 @@ body {
     border-radius: .7rem;
 }
 
+#entries_toggle {
+    margin-left: .5em;
+    cursor: pointer;
+}
+
 h1 {
     font-size: 1.3rem;
 }
@@ -222,4 +227,28 @@ table {
     color: rgba(128, 128, 128, .5);
     background-color: #333;
     padding-bottom: 1rem;
+}
+
+.arrow-up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-left: 0.4em solid transparent;
+    border-right: 0.4em solid transparent;
+    border-bottom: 0.4em solid #343a40;
+}
+
+.arrow-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-left: 0.4em solid transparent;
+    border-right: 0.4em solid transparent;
+    border-top: 0.4em solid #343a40;
 }

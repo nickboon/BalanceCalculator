@@ -11,6 +11,18 @@ const setCycle = cycle => selectedCycle = cycle;
 
 const setBaseTextColour = elements => elements.forEach(element => colourElement(element, 0));
 
+const setEntriesToggleClick = (toggle, entries) => {
+    toggle.click(() => {
+        if (entries.hasClass('show')) {
+            toggle.removeClass('arrow-down');
+            toggle.addClass('arrow-up');
+        } else {
+            toggle.removeClass('arrow-up');
+            toggle.addClass('arrow-down');
+        }
+    });
+};
+
 const displaySheetName = element => element.text(selectedSheet.name);
 
 const displayEntries = element => {
@@ -38,14 +50,11 @@ const toEntriesViewModel = (entries) => entries
 const displaySum = (element) => {
     let amount = calculate.sumPerDay(selectedSheet);
     colourBalanceElementBorder(element, amount);
-    element.text(currencyString(calculate.amountPerCycle(selectedCycle, amount)));
-};
 
-const colourBalanceElement = (element, amount) => {
-    let max = getTargetAmountPerDayFor(selectedSheet.credit);
-    let min = getTargetAmountPerDayFor(selectedSheet.debit);
-
-    colourElement(element, amount, max, min);
+    element
+        .children()
+        .first()
+        .html(currencyString(calculate.amountPerCycle(selectedCycle, amount)));
 };
 
 const colourElement = (element, amount, max, min) => element.css(
@@ -57,13 +66,11 @@ const colourBalanceElementBorder = (element, amount) => {
     let max = getTargetAmountPerDayFor(selectedSheet.credit);
     let min = getTargetAmountPerDayFor(selectedSheet.debit);
 
-    colourElementBorder(element, amount, max, min);
+    element.css(
+        'border-color',
+        `rgb(${colour(amount, max, min)})`
+    );
 };
-
-const colourElementBorder = (element, amount, max, min) => element.css(
-    'border-color',
-    `rgb(${colour(amount, max, min)})`
-);
 
 const getTargetAmountPerDayFor = (entries) => {
     let targetEntry = false;
@@ -80,6 +87,7 @@ const currencyString = amount => amount.toLocaleString(
 
 module.exports = {
     setSheet: setSheet,
+    setEntriesToggleClick: setEntriesToggleClick,
     setCycle: setCycle,
     setBaseTextColour: setBaseTextColour,
     sheetName: displaySheetName,
