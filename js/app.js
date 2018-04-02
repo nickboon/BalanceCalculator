@@ -1,6 +1,6 @@
 require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js'); // to include in bundle
 const $ = require('jquery');
-const display = require('./display.js');
+const display = require('./display');
 
 let cycleSelect = {};
 let sheetInput = {};
@@ -12,14 +12,14 @@ const load = () => {
 
     display.setEntriesToggleClick($('#entries_toggle'), $('#entries'));
 
-    setBaseTextColour();
+    setTextToZeroAmountColour();
 
     if (cycleSelect.val()) setCycle();
     if (sheetInput.prop('files').length !== 0) loadSheet();
 };
 
-const setBaseTextColour = () =>
-    display.setBaseTextColour([
+const setTextToZeroAmountColour = () =>
+    display.setTextToZeroAmountColour([
         $('.masthead-brand'),
         $('.cover'),
         $('.custom-file-label'),

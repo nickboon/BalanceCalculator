@@ -1,7 +1,10 @@
 const $ = require('jquery');
-const display = require('../../js/display.js');
-const sheet = require('../fixtures.js').sheet;
+const display = require('../../js/display');
+const wellKnown = require('../fixtures');
 
-display.setCycle('month');
-display.setSheet(sheet);
+display.setCycle(wellKnown.cycle);
+display.setSheet(wellKnown.sheet);
+display.setTextToZeroAmountColour([$('.cover')]);
+display.sheetName($('#sheet_name'));
 display.entries($('#entries'));
+display.sum($('#sum'));

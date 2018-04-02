@@ -27,6 +27,6 @@ module.exports = {
     maxDebit: build['red'](maxColour, 0),
     defaultCredit: buildColourToRatio('green', 0.5),
     defaultDebit: buildColourToRatio('red', 0.5),
-    zeroBalance: build['grey'](baseColour),
+    zeroAmount: build['grey'](baseColour),
     buildColourToRatio: buildColourToRatio
 };

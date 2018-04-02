@@ -1,15 +1,15 @@
-require('../node_modules/bootstrap/dist/js/bootstrap.bundle.js');
+require('../node_modules/bootstrap/dist/js/bootstrap.bundle');
 const $ = require('jquery');
 const Mustache = require('mustache');
-const calculate = require('./cycles.js');
-const colour = require('./colour.js');
+const calculate = require('./cycles');
+const colour = require('./colour');
 
 let selectedSheet = {};
 let selectedCycle = 'day';
 const setSheet = sheet => selectedSheet = sheet;
 const setCycle = cycle => selectedCycle = cycle;
 
-const setBaseTextColour = elements => elements.forEach(element => colourElement(element, 0));
+const setTextToZeroAmountColour = elements => elements.forEach(element => colourElement(element, 0));
 
 const setEntriesToggleClick = (toggle, entries) => {
     toggle.click(() => {
@@ -89,7 +89,7 @@ module.exports = {
     setSheet: setSheet,
     setEntriesToggleClick: setEntriesToggleClick,
     setCycle: setCycle,
-    setBaseTextColour: setBaseTextColour,
+    setTextToZeroAmountColour: setTextToZeroAmountColour,
     sheetName: displaySheetName,
     entries: displayEntries,
     sum: displaySum

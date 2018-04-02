@@ -1,4 +1,4 @@
-const colours = require('./colours.js');
+const colours = require('./colours');
 
 const calculateAmountColour = (amount, max, min) => {
     if (typeof amount != 'number') throw 'Amount must be a number.';
@@ -7,7 +7,7 @@ const calculateAmountColour = (amount, max, min) => {
     if (amount > 0) return colours.defaultCredit;
     if (amount < 0) return colours.defaultDebit;
 
-    return colours.zeroBalance;
+    return colours.zeroAmount;
 };
 
 const calculateColourToRatio = (amount, max, min) => {
@@ -18,7 +18,7 @@ const calculateColourToRatio = (amount, max, min) => {
     if (amount <= min) return colours.maxDebit;
     if (amount < 0) return colours.buildColourToRatio('red', amount / min);
 
-    return colours.zeroBalance;
+    return colours.zeroAmount;
 };
 
 module.exports = calculateAmountColour;

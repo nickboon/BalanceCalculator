@@ -1,6 +1,6 @@
 const test = require('tape');
-const colours = require('../js/colours.js');
-const colour = require('../js/colour.js');
+const colours = require('../js/colours');
+const colour = require('../js/colour');
 const buildColourToRatio = colours.buildColourToRatio;
 const ratioNotInRangeError = 'Ratio must be betweeen 0 and 1.';
 const unknownColourError = 'Unknown colour "unknownColour".';
@@ -33,7 +33,7 @@ test('colour() given an undefined amount', assert => {
 test('colour() given 0', assert => {
     assert.isEquivalent(
         colour(0),
-        colours.zeroBalance,
+        colours.zeroAmount,
         'should return default zero balance colour');
     assert.end();
 });

@@ -1,29 +1,61 @@
 const test = require('tape');
 const { JSDOM } = require('jsdom');
 const fs = require('fs');
-const wellKnown = require('../fixtures.js');
+const wellKnown = require('../fixtures');
+const zeroAmountColour = require('../../js/colours').zeroAmount;
 
-// display.entries is called in test.app.js
+// display methoods are called in test.app.js and then included in the browserify bundle.
+
+test('display.sheetName()', assert => {
+    assert.equal(
+        setUpDomFixture().window.document.getElementById('sheet_name').textContent,
+        wellKnown.sheet.name,
+        'should display the expected name'
+    );
+    assert.end();
+});
+
 test('display.entries()', assert => {
     assert.isEquivalent(
         getCells(setUpDomFixture().window.document.getElementById('credit_table')),
         wellKnown.creditCells,
-        'should display the expected credit cells');
+        'should display the expected credit cells'
+    );
     assert.end();
 });
 
-//display.entries is called in test.app.js
 test('display.entries()', assert => {
     const document = setUpDomFixture().window.document;
 
     assert.isEquivalent(
         getCells(document.getElementById('debit_table')),
         wellKnown.debitCells,
-        'should display the expected debit cells');
+        'should display the expected debit cells'
+    );
     assert.end();
 });
 
+test('display.sum()', assert => {
+    assert.equal(
+        setUpDomFixture().window.document.getElementById('sum')
+        .firstElementChild
+        .textContent,
+        wellKnown.sum,
+        'should display the expected sum'
+    );
+    assert.end();
+});
 
+test('display.setTextToZeroAmountColour()', assert => {
+    assert.equal(
+        setUpDomFixture().window.document.getElementsByClassName('cover')[0]
+        .style
+        .color,
+        `rgb(${zeroAmountColour.join(', ')})`,
+        'should set text to the zero amount colour'
+    );
+    assert.end();
+});
 
 const setUpDomFixture = () => {
     const testIndexHtml = fs.readFileSync('dist/index.html', 'utf8');

@@ -1,5 +1,5 @@
 const test = require('tape');
-const amountPerDay = require('../js/cycles.js').amountPerDay;
+const amountPerDay = require('../js/cycles').amountPerDay;
 const entryNotObjectError = 'Entry must be an object.';
 const amountNotNumberError = 'Amount must be a number.';
 

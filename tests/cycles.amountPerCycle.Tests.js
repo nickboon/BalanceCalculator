@@ -1,5 +1,5 @@
 const test = require('tape');
-const amountPerCycle = require('../js/cycles.js').amountPerCycle;
+const amountPerCycle = require('../js/cycles').amountPerCycle;
 const invalidArgumentError = 'Cycle must be a string, and days must be a number.';
 const unknownCycleError = 'Unknown cycle "unkownCycle".';
 

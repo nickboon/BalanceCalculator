@@ -1,3 +1,7 @@
+const calculate = require('../js/cycles');
+
+const cycle = 'month';
+
 const sheet = {
     'name': 'Test Balance',
     'credit': [{
@@ -17,16 +21,38 @@ const sheet = {
     }]
 };
 
-const creditCells = [
-    'Salary after tax', '€0.00'
-];
+const calculateSum = () => currencyString(calculate.amountPerCycle(
+    cycle,
+    calculate.sumPerDay(sheet)
+));
 
-const debitCells = [
-    'Wi-fi bill', '€1,000.00'
-];
+// const getSum = entriesName => sheet[entriesName]
+//     .map(entry => entry.amount)
+//     .reduce((accumulator, current) => accumulator + current);
+
+const getCells = entriesName => [].concat.apply( // Array.filter() is not a function
+    [],
+    sheet[entriesName]
+    .filter(entry => entry.description !== 'target')
+    .map(entry => [
+        entry.description,
+        currencyString(calculateAmount(entry))
+    ])
+);
+
+const calculateAmount = entry => calculate.amountPerCycle(
+    cycle,
+    calculate.amountPerDay(entry)
+);
+
+const currencyString = amount => amount.toLocaleString(
+    'en', { style: 'currency', currency: sheet.currency || 'EUR' }
+);
 
 module.exports = {
+    cycle: cycle,
     sheet: sheet,
-    creditCells: creditCells,
-    debitCells: debitCells
+    creditCells: getCells('credit'),
+    debitCells: getCells('debit'),
+    sum: calculateSum()
 };
